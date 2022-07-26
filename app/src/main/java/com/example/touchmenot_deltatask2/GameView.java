@@ -1,5 +1,6 @@
 package com.example.touchmenot_deltatask2;
 
+import static com.example.touchmenot_deltatask2.MainThread.canvas;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -28,14 +29,14 @@ public class GameView<context> extends SurfaceView implements SurfaceHolder.Call
     private TextView hello;
     private int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
     private int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
-    public String text;
-    public String text1;
-    public String text2;
-    public String text4;
+    public String text="";
+    public String text1="";
+    public String text2="";
+    public String text4="";
     private int highScore;
     public int score = 0;
     public int highscore = 0;
-    private int state;
+    private int state=1;
 
 
     public GameView(Context context) {
@@ -71,11 +72,7 @@ public class GameView<context> extends SurfaceView implements SurfaceHolder.Call
         return resizedBitmap;
     }
 
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        characterSprite.y = characterSprite.y - (characterSprite.yVelocity * 10);
-        return super.onTouchEvent(event);
-    }
+
 
 
     @Override
@@ -88,6 +85,8 @@ public class GameView<context> extends SurfaceView implements SurfaceHolder.Call
         thread.start();
 
     }
+
+
 
     private void makeLevel() {
         characterSprite = new CharacterSprite
@@ -187,13 +186,15 @@ public class GameView<context> extends SurfaceView implements SurfaceHolder.Call
         for (int i = 0; i < pipes.size(); i++) {
             //Detect if the character is touching one of the pipes
             if (characterSprite.y < pipes.get(i).yY + (screenHeight / 2) - (gapHeight / 2) && characterSprite.x + 300 > pipes.get(i).xX && characterSprite.x < pipes.get(i).xX + 500) {
-                thread.setRunning(false);
                 gameover();
+                thread.interrupt();
+
 
                 // resetLevel();
             } else if (characterSprite.y + 240 > (screenHeight / 2) + (gapHeight / 2) + pipes.get(i).yY && characterSprite.x + 300 > pipes.get(i).xX && characterSprite.x < pipes.get(i).xX + 500) {
-                thread.setRunning(false);
-                gameover();// OnFalse1();
+                gameover();
+                thread.interrupt();
+                // OnFalse1();
             } else {
                 score = score + 1;
             }
@@ -210,13 +211,13 @@ public class GameView<context> extends SurfaceView implements SurfaceHolder.Call
 
         //Detect if the character has gone off the bottom or top of the screen
         if (characterSprite.y + 240 < 0) {
-            thread.setRunning(false);
             gameover();
+            thread.interrupt();
             //resetLevel();
         }
         if (characterSprite.y > screenHeight) {
-            thread.setRunning(false);
             gameover();
+            thread.interrupt();
             //resetLevel();
         }
     }
@@ -231,22 +232,53 @@ public class GameView<context> extends SurfaceView implements SurfaceHolder.Call
         pipe2.yY = 200;
         pipe3.xX = 3200;
         pipe3.yY = 250;
+        thread.start();
+        Log.i("resetlevel","working");
     }
 
     public void gameover() {
-        Log.i("game over execution", "suck deez");
+        Log.i("game over execution", "hello2");
         state = 0;
         if (score > highScore) {
             highScore = score;
         }
-        thread.setRunning(false);
+       // thread.setRunning(false);
         text = "GAME OVER";
         text1 = "Score= " + String.valueOf(score);
         text2 = "Play Again";
         text4 = "highScore=" + String.valueOf(highScore);
-
+        Object event = null;
+        onTouchEvent((MotionEvent) event);
 
     }
+    @Override
+    public boolean onTouchEvent(MotionEvent event)
+    {
+        if (state == 0 && (event.getX() > 600 && event.getX() < 1000) && (event.getY() > 400 && event.getY() < 850) ){
+            Log.i("hello",String.valueOf(event.getX()));
+            Log.i("hello1",String.valueOf(event.getY()));
+            Log.i("state1", String.valueOf(state));
+            resetLevel();
+            Log.i("alive",String.valueOf(thread.isAlive()));
+
+            thread.start();
+            Log.i("alive",String.valueOf(thread.isAlive()));
+
+        }
+        characterSprite.y = characterSprite.y - (characterSprite.yVelocity * 10);
+        return super.onTouchEvent(event);
+    }
+    public boolean onTouchEvent1(MotionEvent event) {
+        Log.i("ola",String.valueOf(event.getX()));
+        Log.i("olla",String.valueOf(event.getY()));
+        if ((event.getX() > 700 && event.getX() < 1500) && (event.getY() > 700 && event.getY() < 850)) {
+            resetLevel();
+            thread.start();
+
+        }
+        return super.onTouchEvent(event);
+    }
+
 
 
 }
