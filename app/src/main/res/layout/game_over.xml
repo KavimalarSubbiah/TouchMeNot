@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/cardview_light_background"
+    >
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="2dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="640dp"
+        android:layout_marginRight="640dp"
+        android:layout_marginBottom="359dp"
+        android:background="@android:color/holo_blue_dark"
+        android:onClick="restart"
+        android:padding="10dp"
+        android:text="Restart"
+        android:textColor="#ffffff" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="631dp"
+        android:layout_marginLeft="631dp"
+        android:layout_marginTop="-3dp"
+        android:layout_marginEnd="6dp"
+        android:layout_marginRight="6dp"
+        android:layout_marginBottom="359dp"
+        android:text="exit"
+        android:onClick="exit"
+        android:padding="10dp"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="148dp"
+        android:layout_marginLeft="148dp"
+        android:layout_marginTop="131dp"
+        android:layout_marginEnd="533dp"
+        android:layout_marginRight="533dp"
+        android:layout_marginBottom="261dp"
+        android:layout_weight="1"
+        android:text="SCORE: " />
+
+    <TextView
+        android:id="@+id/tvPersonalBest"
+        android:layout_width="75dp"
+        android:layout_height="25dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="511dp"
+        android:layout_marginLeft="511dp"
+        android:layout_marginTop="135dp"
+        android:layout_marginEnd="145dp"
+        android:layout_marginRight="145dp"
+        android:layout_marginBottom="251dp"
+        android:layout_weight="1"
+        android:text="textview" />
+</RelativeLayout>
